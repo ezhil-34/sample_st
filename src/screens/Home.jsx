@@ -63,10 +63,87 @@ const Home = () => {
    
 <div
   className={`
-    fixed top-10 right-6 z-50 hidden md:block
-    
-  ${showLogos ? "opacity-100 scale-100" : "opacity-0 scale-90"}`}
+    fixed top-10 right-6 z-50 hidden md:flex items-center gap-3
+    transition-all duration-700 
+    ${showLogos ? "opacity-100 scale-100" : "opacity-0 scale-90"}
+  `}
 >
+  {/* Round Image */}
+<div
+  className="
+    w-12 h-12
+    relative
+    cursor-pointer
+    shaky
+    group
+  "
+>
+  {/* ORB BASE */}
+  <div
+    className="
+      absolute inset-0
+      rounded-full
+      z-0
+    "
+    style={{
+      background: "radial-gradient(circle at top left, #9fdcff, #1e90ff 45%, #001f3f 100%)",
+      boxShadow: `
+        inset 3px 3px 6px rgba(255,255,255,0.45),
+        inset -6px -8px 12px rgba(0,0,0,0.75),
+        0 10px 30px rgba(30,144,255,0.9)
+      `
+    }}
+  />
+
+  {/* IMAGE WITH ROUND CLIP */}
+  <img
+    src="/pic.avif"
+    alt="orb"
+    className="
+      absolute inset-0
+      w-full h-full
+      object-cover
+      z-10
+      transition-all duration-300 ease-out
+      group-hover:scale-125
+    "
+    style={{
+      clipPath: "circle(50% at 50% 50%)"
+    }}
+  />
+
+  {/* HOVER STATE (ROUND POP-OUT) */}
+  <style>
+    {`
+      .group:hover img {
+        clip-path: circle(65% at 50% 45%);
+        transform: scale(1.10) translate(-4px, -4px);
+      }
+    `}
+  </style>
+
+  {/* GLASS HIGHLIGHT */}
+  <span
+    className="
+      absolute top-1 left-2
+      w-5 h-5
+      rounded-full
+      bg-white/30
+      blur-sm
+      z-20
+      pointer-events-none
+    "
+  />
+</div>
+
+
+
+
+
+
+
+
+  {/* Sign In Button */}
   <button
     onClick={() => navigate("/signin")}
     className="
@@ -86,6 +163,7 @@ const Home = () => {
     Sign In
   </button>
 </div>
+
 
       <div
         className={`hidden md:flex absolute top-8 left-6 flex items-center gap-3 z-40
