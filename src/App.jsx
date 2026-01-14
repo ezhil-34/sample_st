@@ -1,3 +1,4 @@
+
 import { Routes, Route } from "react-router-dom";
 import BackgroundEffect from "./components/Bgeffect.jsx";
 
@@ -11,6 +12,8 @@ import Footer from "./components/footer";
 import NavMenubar from "./components/NavMenuBar";
 import Auth from "./screens/Auth";
 import { useRef } from "react";
+
+import SafetyIndiaText from "./components/SafetyIndiaText.jsx";
 
 const MainPage = () => {
   const HomeRef = useRef(null);
@@ -33,7 +36,7 @@ const MainPage = () => {
 
       <div ref={HomeRef}><Home /></div>
       <div ref={AboutRef}><About /></div>
-      <div ref={EventsRef}><Events /></div>
+      <div ref={EventsRef} id={"Events"}><Events /></div>
       <div ref={RegisterRef}><Register /></div>
       <div ref={FAQsRef}><FAQs /></div>
       <div ref={ContactRef}><Contact /></div>
@@ -53,6 +56,8 @@ const App = () => {
         <Route path="/" element={<MainPage />} />
         <Route path="/signin" element={<Auth mode="signin" />} />
         <Route path="/signup" element={<Auth mode="signup" />} />
+        <Route path="/SafetyIndiaText" element={<SafetyIndiaText />} />
+
       </Routes>
     </>
   );

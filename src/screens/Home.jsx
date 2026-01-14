@@ -69,7 +69,8 @@ const Home = () => {
   `}
 >
   {/* Round Image */}
-<div
+<div 
+ onClick={() => navigate("/SafetyIndiaText")}
   className="
     w-12 h-12
     relative
@@ -96,7 +97,7 @@ const Home = () => {
   />
 
   {/* IMAGE WITH ROUND CLIP */}
-  <img
+  <img 
     src="/pic.avif"
     alt="orb"
     className="

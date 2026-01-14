@@ -1,41 +1,57 @@
-
-html, body, #root {
+/* ================= Root & Background ================= */
+html,
+body,
+#root {
   background: transparent !important;
   min-height: 100%;
 }
 
-
-
+/* ================= Fonts ================= */
 @font-face {
   font-family: "StrangerThings";
-  src: url("fonts/ITC-Benguiat-Bold.otf") format("truetype");
+  src: url("fonts/ITC-Benguiat-Bold.otf") format("opentype");
   font-weight: normal;
   font-style: normal;
-  
+}
 
-   font-family: "Stranger";
+@font-face {
+  font-family: "Stranger";
   src: url("fonts/ITCBenguiatStdBookCn.OTF") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
+
+/* ================= Red Glow Animation ================= */
 @keyframes redGlow {
   0% {
-    box-shadow: 0 0 10px rgba(229, 9, 20, 0.4),
-                0 0 20px rgba(229, 9, 20, 0.3);
+    box-shadow:
+      0 0 10px rgba(229, 9, 20, 0.4),
+      0 0 20px rgba(229, 9, 20, 0.3);
   }
   50% {
-    box-shadow: 0 0 20px rgba(229, 9, 20, 0.8),
-                0 0 40px rgba(229, 9, 20, 0.6);
+    box-shadow:
+      0 0 20px rgba(229, 9, 20, 0.8),
+      0 0 40px rgba(229, 9, 20, 0.6);
   }
   100% {
-    box-shadow: 0 0 10px rgba(229, 9, 20, 0.4),
-                0 0 20px rgba(229, 9, 20, 0.3);
+    box-shadow:
+      0 0 10px rgba(229, 9, 20, 0.4),
+      0 0 20px rgba(229, 9, 20, 0.3);
   }
 }
 
 .glow-red {
   animation: redGlow 5s infinite ease-in-out;
 }
+
+/* Disable animations globally */
+.no-anim .glow-red,
+.no-anim .animated-border::before {
+  animation: none !important;
+  filter: none !important;
+}
+
+/* ================= Scrollbar Hide ================= */
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
@@ -43,14 +59,7 @@ html, body, #root {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
-.no-anim .glow-red {
-  animation: none !important;
-}
 
-.no-anim .animated-border::before {
-  animation: none !important;
-  filter: none;
-}
 /* ================= Animated Red Border ================= */
 .animated-border {
   position: relative;
@@ -58,26 +67,21 @@ html, body, #root {
   overflow: hidden;
 }
 
-/* moving red line */
 .animated-border::before {
   content: "";
   position: absolute;
   inset: 0;
-  border-radius: 16px;
   padding: 2px;
-  filter: drop-shadow(0 0 8px red);
-
-
+  border-radius: 16px;
   background: linear-gradient(
     90deg,
     transparent,
     #ff0000,
     transparent
   );
-
   background-size: 300% 300%;
   animation: borderRun 8s linear infinite;
-  
+  filter: drop-shadow(0 0 8px red);
 
   -webkit-mask:
     linear-gradient(#fff 0 0) content-box,
@@ -96,7 +100,8 @@ html, body, #root {
     background-position: 300% 50%;
   }
 }
-/* 🔥 Reduce load on mobile */
+
+/* ================= Mobile Performance ================= */
 @media (max-width: 768px) {
   .glow-red {
     animation-duration: 10s;
@@ -110,7 +115,8 @@ html, body, #root {
     perspective: none;
   }
 }
-/* ===== Horizontal Scroll Gradient Hint ===== */
+
+/* ================= Horizontal Scroll Hint ================= */
 .scroll-hint {
   position: relative;
 }
@@ -136,40 +142,35 @@ html, body, #root {
   background: linear-gradient(to left, #000, transparent);
 }
 
+.scroll-hint > div {
+  overscroll-behavior-x: contain;
+}
 
-/* Enable scroll snapping properly */
+/* ================= Scroll Snap ================= */
 @media (max-width: 768px) {
   .snap-x {
     scroll-snap-type: x mandatory;
   }
 }
 
-/* Hide gradient hint on desktop */
-
-
-/* Prevent scroll chaining */
-.scroll-hint > div {
-  overscroll-behavior-x: contain;
-}
-
-
-
-
+/* ================= Subtle Shake ================= */
 @keyframes subtle-shake {
-  0%   { transform: translate(0, 0) rotate(0deg); }
-  20%  { transform: translate(-1px, 1px) rotate(-0.5deg); }
-  40%  { transform: translate(1px, -1px) rotate(0.5deg); }
-  60%  { transform: translate(-1px, -1px) rotate(-0.3deg); }
-  80%  { transform: translate(1px, 1px) rotate(0.3deg); }
+  0% { transform: translate(0, 0) rotate(0deg); }
+  20% { transform: translate(-1px, 1px) rotate(-0.5deg); }
+  40% { transform: translate(1px, -1px) rotate(0.5deg); }
+  60% { transform: translate(-1px, -1px) rotate(-0.3deg); }
+  80% { transform: translate(1px, 1px) rotate(0.3deg); }
   100% { transform: translate(0, 0) rotate(0deg); }
 }
 
 .shaky {
   animation: subtle-shake 0.35s infinite;
 }
+
+/* ================= Floating Particles ================= */
 @keyframes float {
   0% {
-    transform: translateY(0px);
+    transform: translateY(0);
     opacity: 0.6;
   }
   50% {
@@ -177,7 +178,55 @@ html, body, #root {
     opacity: 1;
   }
   100% {
-    transform: translateY(0px);
+    transform: translateY(0);
     opacity: 0.6;
   }
+}
+
+/* ================= Distressed Text ================= */
+.text-distressed {
+  filter: url(#distress-filter);
+}
+
+/* ================= Particle Style (NO Tailwind dependency) ================= */
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: red;
+  border-radius: 50%;
+  box-shadow:
+    0 0 6px #ff0000,
+    0 0 12px #ff0000,
+    0 0 18px #ff0000;
+}
+
+/* ================= Red Glow Text ================= */
+.text-red-glow {
+  text-shadow:
+    2px 2px 0 #ff0000,
+    -1px -1px 0 #000,
+    0 0 10px rgba(255, 0, 0, 0.8),
+    0 0 20px rgba(255, 0, 0, 0.8),
+    0 0 30px rgba(255, 0, 0, 0.8),
+    0 0 40px rgba(255, 0, 0, 0.6),
+    0 0 70px rgba(255, 0, 0, 0.5);
+  -webkit-text-stroke: 1px rgba(255, 0, 0, 0.5);
+}
+
+/* ================= Particle Emanation ================= */
+.particle-emanation {
+  position: relative;
+  pointer-events: none;
+}
+
+.particle-emanation::before,
+.particle-emanation::after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 8px;
+  background: linear-gradient(to bottom, #ff0000, transparent);
+  box-shadow: 0 0 4px #ff0000;
+  opacity: 0.8;
 }

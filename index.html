@@ -18,6 +18,19 @@
     </style>
   </head>
   <body>
+
+     <svg style="position: absolute; width: 0; height: 0;">
+      <defs>
+        <filter id="distress-filter">
+          <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" result="noise"/>
+          <feDisplacementMap in="SourceGraphic" in2="noise" scale="2" xChannelSelector="R" yChannelSelector="G"/>
+        </filter>
+        <filter id="scratch-filter">
+          <feTurbulence type="turbulence" baseFrequency="0.04" numOctaves="3" result="turbulence"/>
+          <feDisplacementMap in="SourceGraphic" in2="turbulence" scale="1.5"/>
+        </filter>
+      </defs>
+    </svg>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>
