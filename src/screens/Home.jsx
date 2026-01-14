@@ -58,7 +58,7 @@ const Home = () => {
 
 
   return (
-    <section className="relative flex flex-col justify-center items-center bg-black min-h-screen overflow-hidden px-4 sm:px-6 md:px-10">
+    <section className="relative flex flex-col justify-center items-center  min-h-screen overflow-hidden px-4 sm:px-6 md:px-10">
 
    
 <div
