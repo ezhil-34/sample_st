@@ -1,6 +1,14 @@
 import React from "react";
+import { useState, useEffect } from "react";
 
 const SafetyIndiaText = () => {
+
+  const [showLine, setShowLine ] = useState(false);
+
+  useEffect(() => {
+        const timer = setTimeout(() => setShowLine(true), 2000);
+        return() => clearTimeout(timer);
+  }, []);
   // Generate particles around letters
   const generateParticles = (count = 20) => {
     return Array.from({ length: count }, (_, i) => ({
@@ -91,7 +99,7 @@ const SafetyIndiaText = () => {
           />
         ))}
       </div>
-
+        <div className="inline-block">
       {/* Main Text Container */}
       <h1 className="relative z-10 font-serif text-center select-none">
         <div className="flex flex-col items-center">
@@ -125,18 +133,18 @@ const SafetyIndiaText = () => {
               <div className="absolute top-2/3 left-[50%] w-1 h-1 bg-red-400 rounded-full shadow-[0_0_8px_red] animate-ping" style={{ animationDuration: '1.8s', animationDelay: '1.1s' }} />
             </div>
           </div>
-
+                
       
         </div>
+        
       </h1>
-
-      {/* Stranger Things Style Text Section */}
-      <div className="relative z-10 mt-32 md:mt-40 flex flex-col items-center justify-center px-4">
-        {/* Watch Border Frame */}
-        <div className="relative w-full max-w-5xl mx-auto p-6 md:p-10">
-         
-        </div>
-      </div>
+       <div
+            className={`h-[3px] sm:h-1 bg-white mt-4 origin-center transition-transform duration-1000 border-red-600
+              ${showLine ? "scale-x-100 delay-500 shadow-[0_0_10px_rgba(229,9,20,0.8),0_0_20px_rgba(229,9,20,0.6)]" : "scale-x-0"}
+            `}
+          />
+</div>
+     
     </section>
   );
 };
